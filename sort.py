@@ -80,14 +80,40 @@ def marge_sort(data):
 def quick_sort(data):
     if len(data) < 1:
         return data
+    pivot = data[0]
+    left = []
+    right = []
+    for x in range(1,len(data)):
+        if data[x] <= pivot:
+            left.append(data[x])
+        else:
+            right.append(data[x])
+
+    left = quick_sort(left)
+    right = quick_sort(right)
+
+    return left + [pivot] + right
+
+
+def quick_sort2nd(data):
+    #counter = 0
+    if len(data) < 64:
+        return insertion_sort(data)
     #print(len(data))
     pivot = data[0]
     #配列の２つを比べて小さい方を基準にする
-    #if len(data) > 2:
-            #pivot = data[1] if data[1] < data[0]  else data[0]
-    if len(data) > 3:
-            pivot = data[0] if data[0] < data[-1] else data[-1]
-            pivot = len(data) / 2 if (len(data) / 2) < pivot else pivot  
+    if len(data) > 2:
+        pivot = data[1] if data[1] < data[0]  else data[0]
+    #CENTER = data[(len(data) // 2):(len(data) // 2+1)]
+    #point = data[CENTER]
+    #center = data[0] + data[-1] / 2
+    #if (counter >= 2):
+            #counter += 1
+            #if len(data) > 2:
+                #pivot = data[1] if data[1] < data[0]  else data[0]
+            #if len(data) > 4:
+                    #pivot = data[0] if data[0] < data[-1] else data[-1]
+                    #pivot = center if center < pivot else pivot
     left = []
     right = []
     for x in range(1,len(data)):
@@ -168,20 +194,34 @@ if __name__ == '__main__':
     print()
     print('経過時間、', (end-start))
     print('平均時間、', ((end-start) / LOOP_COUNT))
-    '''
+    
 
     #data = data_generate()
     #a = quick_sort(data)
     #print(a)
+    
 
     start = time.time()
-    for _ in range(100):
+    for _ in range(10000):
         data = data_generate()
         quick_sort(data)
-        [print(',', end='' ) if _ % 100 != 99 else print(int(_ / 100 + 1))]
+        #[print(',', end='' ) if _ % 100 != 99 else print(int(_ / 100 + 1))]
         sys.stdout.flush()
     end = time.time()
-    print()
+    print('初期クイックソート')
     print('経過時間、', (end-start))
-    print('平均時間、', ((end-start) / 100))
-    
+    print('平均時間、', ((end-start) / 10000))
+    ''' 
+    #data = data_generate()
+    #a = quick_sort2nd(data)
+    #print(a)
+    start = time.time()
+    for _ in range(10000):
+        data = data_generate()
+        quick_sort2nd(data)
+        #[print(',', end='' ) if _ % 100 != 99 else print(int(_ / 100 + 1))]
+        sys.stdout.flush()
+    end = time.time()
+    print('クイックソート2nd')
+    print('経過時間、', (end-start))
+    print('平均時間、', ((end-start) / 10000))
