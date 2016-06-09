@@ -64,7 +64,7 @@ public class Sort {
 
             if(a[left] < a[mid]){
                 if(a[right] < a[left]){
-                    pivot = a[mid];
+                    pivot = a[left];
                 }
                 else if(a[mid] < a[right]){
                     pivot = a[mid];
@@ -123,7 +123,7 @@ public class Sort {
 
             if(a[left] < a[mid]){
                 if(a[right] < a[left]){
-                    pivot = a[mid];
+                    pivot = a[left];
                 }
                 else if(a[mid] < a[right]){
                     pivot = a[mid];
